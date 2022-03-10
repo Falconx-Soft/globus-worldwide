@@ -137,10 +137,11 @@ def export_warehouse_details(request):
                 print('********************')
                 print('list:', list_of_data)
                 print('data:')
+        n = random.randint(0,10000)
         if list_of_data:
             keys = list_of_data[0].keys()
 
-            with open('data.csv', 'w', newline='') as output_file:
+            with open('warehouse'+str(n)+'.csv', 'w', newline='') as output_file:
                 dict_writer = csv.DictWriter(output_file, keys)
                 dict_writer.writeheader()
                 dict_writer.writerows(list_of_data)
@@ -178,7 +179,7 @@ def export_customer(request):
         if list_of_data:
             keys = list_of_data[0].keys()
 
-            with open('customer1'+str(n)+'.csv' , 'w', newline='') as output_file:
+            with open('customer'+str(n)+'.csv' , 'w', newline='') as output_file:
                 dict_writer = csv.DictWriter(output_file, keys)
                 dict_writer.writeheader()
                 dict_writer.writerows(list_of_data)

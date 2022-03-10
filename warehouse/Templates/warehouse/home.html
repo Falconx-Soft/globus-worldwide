@@ -1,13 +1,16 @@
-{% extends "warehouse/base.html" %}
+{% extends "warehouse/home_base.html" %}
 
 {% block css %}
 <style>
 .container{
+    margin-top: -25px;
     justify-items: center;
     align-items: center;
     padding: 100px;
 }
 .home_buttons{
+    margin-top: 0px;
+    text-align: center;
     margin: auto;
 
     width: 300px;
@@ -15,18 +18,24 @@
 }
 .home_button_block{
     margin-top: 20px;
-    margin-left: auto;
+    margin-left: 400PX;
     position: relative;
     justify-content: center;
 
     align-items: center;
 }
 .search_buttons{
-    width: 250px;
+    margin-top: 4px;
+    width: 190px;
 }
 .btn{
-    background: #628ac4;
+    text-transform: capitalize;
+    background:#1371ba;
     height: 50px;
+    border-radius: 109px;
+    margin-left: 42px;
+    padding: 0px;
+
 }
 
 </style>
@@ -34,18 +43,19 @@
 {% block body %}
 
 <body>
+    
     <div class="container" style="text-align: center;">
-        <h2>Click on one of the following button to search</h2>
+        <h2 style="float: left; margin-top: -80px; margin-left: 101px;">Search By:</h2>
         
-        <div class=" d-block home_button_block">
-            <div class="home_buttons">
-               <a href="{% url 'customer_search' %}"><button type="button" class="btn btn-primary my-2"><h2 class="search_buttons">Search Customer</h2></button></a> 
+        <div class=" d-flex ms-1 home_button_block">
+            <div class="home_buttons ml-3">
+               <a href="{% url 'customer_search' %}"><button type="button" class="btn btn-primary my-2"><h3 class="search_buttons">Customer</h3></button></a> 
             </div>
             <div class="home_buttons">
-                <a href="{% url 'product_search' %}"><button type="button" class="btn btn-primary my-2"><h2 class="search_buttons"> Search Product</h2></button></a>
+                <a href="{% url 'product_search' %}"><button type="button" class="btn btn-primary my-2"><h3 class="search_buttons"> Product</h3></button></a>
             </div>
             <div class="home_buttons">
-                <a href="{% url 'options' %}"><button type="button" class="btn btn-primary my-2"><h2 class="search_buttons">WareHouse Details</h2></button></a>
+                <a href="{% url 'options' %}"><button type="button" class="btn btn-primary my-2"><h3 class="search_buttons">Warehouse</h3></button></a>
             </div>
         </div>
     </div>
