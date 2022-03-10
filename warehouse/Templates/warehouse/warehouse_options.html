@@ -1,0 +1,57 @@
+{% extends "warehouse/base.html" %}
+{% block css %}
+<style>
+.container{
+    justify-items: center;
+    align-items: center;
+    padding: 100px;
+}
+.warehouse_buttons{
+    margin: revert;
+
+    width: 300px;
+
+}
+.home_button_block{
+    margin-top: 20px;
+    margin-left: auto;
+    position: relative;
+    justify-content: center;
+
+    align-items: center;
+}
+.search_buttons{
+    width: 250px;
+}
+.btn{
+    background: #628ac4;
+    height: 50px;
+    font-size: large;
+}
+
+</style>
+{% endblock %}
+{% block body %}
+
+<body>
+    <div class="container">
+        <h2>Click on the warehouse number to see the details of warehouse</h2>
+        <form method="post" action="{% url 'options' %}">
+            {% csrf_token %}
+            {% for storage in list_of_warehouses %}
+            <div class=" d-block home_button_block">
+                <div class="warehouse_buttons">
+                   <input name="storage_name" type="submit" value="{{storage}}" class="btn btn-primary my-2"> 
+                </div>
+            </div>
+            {% endfor %}
+        </form>
+        
+        
+    </div>
+    
+        
+</body>
+
+
+{% endblock %}

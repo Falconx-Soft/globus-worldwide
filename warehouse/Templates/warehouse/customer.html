@@ -1,0 +1,131 @@
+{% extends "warehouse/base.html" %}
+{% block css %}
+<style>
+    .row {
+        font-size: large;
+        font-weight: 600;
+
+    }
+
+    .col {
+        border: 2px solid;
+        background: #5b5fb0;
+    }
+
+    .searched_col {
+        background: #abaee2;
+    }
+
+    .table {
+        font-size: medium;
+        border: 2px solid;
+    }
+
+    th {
+        border: 1px solid;
+    }
+
+    td {
+        border: 1px solid;
+    }
+
+    tr {
+        background: cadetblue;
+    }
+
+    .btn {
+        width: 70px;
+        float: left;
+        font-size: large;
+
+    }
+</style>
+
+{% endblock %}
+{% block body %}
+
+<body>
+    
+        
+            <form method="post" action="{% url 'export_customer' %}">
+                {% csrf_token %}
+                <button class="btn btn-lg btn-primary btn-block mb-2 mx-2" type="submit" style="">Export</button>
+                <input id="input_customer" type="text" value="" name="serial_numbers" hidden required>
+            </form>
+
+            <table class="table my-5 ms-1 me-1">
+                <thead>
+                    <tr>
+                        <th>Select rows</th>
+                        <th>Customer Name</th>
+                        <th>customer_id</th>
+                        <th>serial_number</th>
+                        <th>height</th>
+                        <th>Width</th>
+                        <th>Length</th>
+                        <th>Storage Space</th>
+                        <th>Weight</th>
+                        <th>Storage Name</th>
+                        <th>Locate</th>
+                        <th>Date </th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        
+                    </tr>
+                </thead>
+                {% for customer in ware_house_obj %}
+                <tbody>
+                    <tr>
+                        <td><input type="checkbox" class="form-check-input" id="check_button" name="is_client"
+                            value="{{customer.serial_number}}"></td>
+                        <td>{{customer.customer_name}}</td>
+                        <td>{{customer.customer_id}}  </td>
+                        <td>{{customer.serial_number}}</td>
+                        <td>{{customer.height}}       </td>
+                        <td>{{customer.width}}        </td>
+                        <td>{{customer.length}}       </td>
+                        <td>{{customer.storage_space}}</td>
+                        <td>{{customer.weight}}       </td>
+                        <td>{{customer.storage_name}} </td>
+                        <td>{{customer.locate}}       </td>
+                        <td>{{customer.date}}         </td>
+                        <td>{{customer.description}}  </td>
+                        <td>{{customer.quantity}}     </td>
+        
+                    </tr>
+                   
+                </tbody>
+                {% endfor %}
+            </table>
+           
+    
+        
+
+    
+    
+    <script>
+         var str =""
+        $(".form-check-input").click(function () {
+           var id= $(this).val();
+           if ($('#input_customer').val().includes(id)){
+            console.log('in if statement')
+            str= str.replace(id+',', '')
+            $('#input_customer').val(str)
+           }
+                     
+           else{
+            str = str  + id+ ','
+           console.log('string value', str)
+           
+           $('#input_customer').val(str)
+
+           }
+
+           console.log((' input value', $('#input_customer').val()))
+           
+        });
+
+    </script>
+</body>
+
+{% endblock %}

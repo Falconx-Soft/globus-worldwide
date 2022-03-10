@@ -1,0 +1,144 @@
+{% extends "warehouse/base.html" %}
+{% block css %}
+<style>
+    .row {
+        font-size: large;
+        font-weight: 600;
+
+    }
+
+    .col {
+        border: 2px solid;
+        background: #5b5fb0;
+    }
+
+    .searched_col {
+        background: #abaee2;
+    }
+
+    .ware {
+        /* max-width: 102px; */
+        background: #abaee2;
+    }
+    .table{
+        font-size: medium;
+    border: 2px solid;
+    }
+    th{
+        border: 1px solid;
+    }
+    td{
+        border: 1px solid;
+    }
+    tr{
+        background: cadetblue;
+    }
+    .btn {
+        width: 70px;
+        float: left;
+        font-size: large;
+
+    }
+</style>
+
+{% endblock %}
+{% block body %}
+
+<body>
+    <h1>{{warehouse_no}}</h1>
+    <form method="post" action="{% url 'export_details' %}">
+        {% csrf_token %}
+        <button class="btn btn-lg btn-primary btn-block mb-2 ms-2" type="submit" style="">Export</button>
+        <input id="input" type="text" value="" name="serial_numbers" hidden required>
+    </form>
+    <table class="table my-5 ms-1 me-1">
+       
+        {% for warehouse in all_warehouse_data %}
+        <tbody>
+            <tr>
+                <td><input type="checkbox" class="form-check-input-warehouse" id="check_button" name="is_client"
+                    value="{{warehouse.serial_number}}"></td>
+                <td>{{warehouse.customer_name}}</td>
+                <td>{{warehouse.customer_id}}  </td>
+                <td>{{warehouse.serial_number}}</td>
+                <td>{{warehouse.height}}       </td>
+                <td>{{warehouse.width}}        </td>
+                <td>{{warehouse.length}}       </td>
+                <td>{{warehouse.storage_space}}</td>
+                <td>{{warehouse.weight}}       </td>
+                <td>{{warehouse.storage_name}} </td>
+                <td>{{warehouse.locate}}       </td>
+                <td>{{warehouse.date}}         </td>
+                <td>{{warehouse.description}}  </td>
+                <td>{{warehouse.quantity}}     </td>
+
+            </tr>
+           
+        </tbody>
+        {% endfor %}
+    </table>
+    <!-- <div class="mt-5">
+        <div class="row">
+            <div class="col p-3  text-dark">Customer Name </div>
+            <div class="col p-3  text-dark">Customer ID </div>
+            <div class="col p-3  text-dark">Serial Number </div>
+            <div class="col p-3  text-dark">Height </div>
+            <div class="col p-3  text-dark">Width </div>
+            <div class="col p-3  text-dark">Length </div>
+            <div class="col p-3  text-dark">Storage Space </div>
+            <div class="col p-3  text-dark">Weight </div>
+            <div class="col p-3  text-dark">Storage Name </div>
+            <div class="col p-3  text-dark">Locate </div>
+            <div class="col p-3  text-dark">Date </div>
+            <div class="col p-3  text-dark">Description </div>
+            <div class="col p-3  text-dark">Quantity </div>
+        </div>
+        {% for warehouse in all_warehouse_data %}
+        <div class="row">
+            <div class="col p-3 ware text-dark">{{warehouse.customer_name}}  </div>
+            <div class="col p-3 ware text-dark">{{warehouse.customer_id}}              </div>
+            <div class="col p-3 ware text-dark">{{warehouse.serial_number}}        </div>
+            <div class="col p-3 ware text-dark">{{warehouse.height}}             </div>
+            <div class="col p-3 ware text-dark">{{warehouse.width}}               </div>
+            <div class="col p-3 ware text-dark">{{warehouse.length}}          </div>
+            <div class="col p-3 ware text-dark">{{warehouse.storage_space}}          </div>
+            <div class="col p-3 ware text-dark">{{warehouse.weight}}                </div>
+            <div class="col p-3 ware text-dark">{{warehouse.storage_name}}              </div>
+            <div class="col p-3 ware text-dark">{{warehouse.locate}}              </div>
+            <div class="col p-3 ware text-dark">{{warehouse.date}}                     </div>
+            <div class="col p-3 ware text-dark">{{warehouse.description}}              </div>
+            <div class="col p-3 ware text-dark">{{warehouse.quantity}}          </div>
+        </div> -->
+        <!-- {% endfor %} -->
+
+    <!-- </div> -->
+    <script>
+        var input_value=$('#input').val()
+        var str =""
+        $(".form-check-input-warehouse").click(function () {
+           var id= $(this).val();
+           console.log(id)
+           if ($('#input').val().includes(id)){
+            console.log('in if statement')
+            str= str.replace(id+',', '')
+            $('#input').val(str)
+           }
+                     
+           else{
+            str = str  + id+ ','
+           console.log('string value', str)
+           
+           $('#input').val(str)
+
+           }
+          
+           
+
+           console.log((' input value', $('#input').val()))
+           
+        });
+
+    </script>
+</body>
+
+{% endblock %}

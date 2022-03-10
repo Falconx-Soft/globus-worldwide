@@ -1,0 +1,40 @@
+{% extends "warehouse/base.html" %}
+{% block css %}
+
+{% endblock %}
+{% block body %}
+
+<body>
+
+    <div class="login-page">
+
+        <div class="login-container">
+
+            <form method="post" action="{% url 'login' %}" class="login-form">
+                {% csrf_token %}
+                {% if messages %}
+                <ul class="messages" style=" color: brown; font-weight: 600; padding: 2px;">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                </ul>
+                {% endif %}
+                <div class="username-info">
+                    <label for="username">
+                        <input id="username" name="username" placeholder="Username" required />
+                    </label>
+                </div>
+                <div class="password-info">
+                    <label for="password">
+                        <input id="password" name="password" placeholder="Password" required />
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" style="width: 100%;">Login</button> 
+                <a class="forgot-text" href="#">Forgot password?</a>
+            </form>
+        </div>
+
+
+    </div>
+</body>
+{% endblock %}

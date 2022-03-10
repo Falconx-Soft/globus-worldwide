@@ -1,0 +1,55 @@
+{% extends "warehouse/base.html" %}
+{% block css %}
+<style>
+.customer_search{
+    align-items: center;
+    position: relative;
+    margin-left: 400px;
+    margin: 180px;
+   
+
+}
+.search-btn{
+    border: 2px solid;
+    width: 116px;
+    padding: 4px;
+    text-align: center;
+    font-size: x-large;
+    font-weight: 700;
+    background: #6899e3;
+}
+
+</style>
+
+{% endblock %}
+{% block body %}
+<body>
+<div class="container">
+    <div class="customer_search">
+        <form method="post" action="{% url 'customer_search' %}">
+            {% csrf_token %}
+            <div class="username-info">
+                <label for="username">
+                    <input id="customer_name" name="customer_name" type="text" placeholder="Customer Name"  />
+                </label>
+            </div>
+            <div class="password-info">
+                <label for="password">
+                    <input id="customer_id" name="customer_id" type="text" placeholder="Customer ID" />
+                </label>
+            </div>
+            <button class="btn btn-lg btn search-btn" type="submit" >Search</button> 
+            
+            
+        </form>
+    </div>
+    
+    
+</div>
+
+    
+
+</body>
+
+
+{% endblock %}
