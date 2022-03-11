@@ -103,6 +103,12 @@
         .w3-sidebar{
             background: #1371ba;
         }
+        .home_button{
+            float: left; color: #fff;
+            position: relative;
+    left: -900px;
+        }
+    
     </style>
     {% block css %}
     {% endblock %}
@@ -110,6 +116,9 @@
 </head>
 
 <body style="text-align: center;">
+    
+    
+        
     <div class="w3-sidebar  w3-bar-block" style="width:15%; border-right:2px solid white;">
         <div >
             <h2 class="w3-bar-item" style="font-style: oblique; text-transform: capitalize; font-weight: 700;">{{request.user.username}}</h2>

@@ -33,7 +33,7 @@
         background: cadetblue;
     }
 
-    .btn {
+    .customer_btn {
         width: 70px;
         float: left;
         font-size: large;
@@ -49,7 +49,7 @@
         
             <form method="post" action="{% url 'export_customer' %}">
                 {% csrf_token %}
-                <button class="btn btn-lg btn-primary btn-block mb-2 mx-2" type="submit" style="">Export</button>
+                <button class="btn btn-lg customer_btn btn-primary btn-block mb-2 mx-2" type="submit" style="">Export</button>
                 <input id="input_customer" type="text" value="" name="serial_numbers" hidden required>
             </form>
 
@@ -70,6 +70,7 @@
                         <th>Date </th>
                         <th>Description</th>
                         <th>Quantity</th>
+                        <th>Warehouse</th>
                         
                     </tr>
                 </thead>
@@ -91,6 +92,7 @@
                         <td>{{customer.date}}         </td>
                         <td>{{customer.description}}  </td>
                         <td>{{customer.quantity}}     </td>
+                        <td>{{customer.warehouse}}     </td>
         
                     </tr>
                    

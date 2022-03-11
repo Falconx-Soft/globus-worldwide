@@ -22,9 +22,9 @@
     align-items: center;
 }
 .search_buttons{
-    width: 250px;
+    width: 100px;
 }
-.btn{
+.ware_opts{
     text-transform: capitalize;
     background: #1371ba;
     height: 50px;
@@ -43,7 +43,7 @@
             {% for storage in list_of_warehouses %}
             <div class=" d-block home_button_block">
                 <div class="warehouse_buttons d-flex">
-                   <input name="storage_name" type="submit" value="{{storage}}" class="btn btn-primary my-2"> 
+                   <input name="storage_name" type="submit" value="{{storage}}" class="btn btn-primary my-2 ware_opts"> 
                 </div>
             </div>
             {% endfor %}

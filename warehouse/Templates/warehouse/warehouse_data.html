@@ -33,7 +33,7 @@
     tr{
         background: cadetblue;
     }
-    .btn {
+    .ware_data {
         width: 70px;
         float: left;
         font-size: large;
@@ -45,13 +45,33 @@
 {% block body %}
 
 <body>
-    <h1 style="text-transform: capitalize; font-style: oblique;">{{warehouse_no}}</h1>
+    <h1 style="text-transform: capitalize; font-style: oblique; text-align: center;">{{warehouse_no}}</h1>
     <form method="post" action="{% url 'export_details' %}">
         {% csrf_token %}
-        <button class="btn btn-lg btn-primary btn-block mb-2 ms-2" type="submit" style="">Export</button>
+        <button class="btn btn-lg btn-primary btn-block mb-2 ms-2 ware_data" type="submit" style="">Export</button>
         <input id="input" type="text" value="" name="serial_numbers" hidden required>
     </form>
     <table class="table my-5 ms-1 me-1">
+        <thead>
+            <tr>
+                <th>Select rows</th>
+                <th>Customer Name</th>
+                <th>customer_id</th>
+                <th>serial_number</th>
+                <th>height</th>
+                <th>Width</th>
+                <th>Length</th>
+                <th>Storage Space</th>
+                <th>Weight</th>
+                <th>Storage Name</th>
+                <th>Locate</th>
+                <th>Date </th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th>Warehouse</th>
+                
+            </tr>
+        </thead>
        
         {% for warehouse in all_warehouse_data %}
         <tbody>
@@ -71,6 +91,7 @@
                 <td>{{warehouse.date}}         </td>
                 <td>{{warehouse.description}}  </td>
                 <td>{{warehouse.quantity}}     </td>
+                <td>{{warehouse.warehouse}}     </td>
 
             </tr>
            

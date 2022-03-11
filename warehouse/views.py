@@ -8,6 +8,7 @@ from django.contrib.auth import authenticate, login
 from .models import*
 import csv
 import random
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -35,7 +36,7 @@ def login_view(request):
 def home_view(request):
     return render(request, 'warehouse/home.html')
 
-
+@login_required(login_url='login')
 def customer_search_view(request):
     if request.method == 'POST':
         customer_name = request.POST.get('customer_name')
@@ -43,42 +44,74 @@ def customer_search_view(request):
         if customer_name != '' and customer_id != '':
             ware_house_obj = ware_house_model.objects.filter(
                 customer_name=customer_name, customer_id=customer_id)
-            context = {'ware_house_obj': ware_house_obj}
-            return render(request, 'warehouse/customer.html', context)
+            if ware_house_obj.exists():
+                
+                context = {'ware_house_obj': ware_house_obj}
+                return render(request, 'warehouse/customer.html', context)
+            else:
+                messages.success(request, 'Your Entered Data not matched.')
+                return redirect( '/customer_search')
         if customer_name != '' and customer_id == '':
             ware_house_obj = ware_house_model.objects.filter(
                 customer_name=customer_name)
-            context = {'ware_house_obj': ware_house_obj}
-            return render(request, 'warehouse/customer.html', context)
+            if ware_house_obj.exists():
+                
+                context = {'ware_house_obj': ware_house_obj}
+                return render(request, 'warehouse/customer.html', context)
+            else:
+                messages.success(request, 'Your Entered Data not matched.')
+                return redirect( '/customer_search')
         if customer_name == '' and customer_id != '':
             ware_house_obj = ware_house_model.objects.filter(
                 customer_id=customer_id)
-            context = {'ware_house_obj': ware_house_obj}
-            return render(request, 'warehouse/customer.html', context)
+            if ware_house_obj.exists():
+                
+                context = {'ware_house_obj': ware_house_obj}
+                return render(request, 'warehouse/customer.html', context)
+            else:
+                messages.success(request, 'Your Entered Data not matched.')
+                return redirect( '/customer_search')
 
     return render(request, 'warehouse/customer_search.html')
 
-
+@login_required(login_url='login')
 def product_search_view(request):
     if request.method == 'POST':
         product_description = request.POST.get('description')
         serial_number = request.POST.get('serial_number')
         print('descripton', product_description)
         if product_description != '' and serial_number != '':
-            ware_house_obj = ware_house_model.objects.filter(
-                description=product_description, serial_number=serial_number)
-            context = {'ware_house_obj': ware_house_obj}
-            return render(request, 'warehouse/customer.html', context)
+
+            ware_house_obj = ware_house_model.objects.filter( description=product_description, serial_number=serial_number)
+            if ware_house_obj.exists():
+                
+                context = {'ware_house_obj': ware_house_obj}
+                return render(request, 'warehouse/customer.html', context)
+            else:
+                messages.success(request, 'Your Entered Data not matched.')
+                return redirect( '/product_search')
+
         if product_description != '' and serial_number == '':
             ware_house_obj = ware_house_model.objects.filter(
                 description=product_description)
-            context = {'ware_house_obj': ware_house_obj}
-            return render(request, 'warehouse/customer.html', context)
+            print('------------------------')
+            if ware_house_obj.exists():
+                
+                context = {'ware_house_obj': ware_house_obj}
+                return render(request, 'warehouse/customer.html', context)
+            else:
+                messages.success(request, 'Your Entered Data not matched.')
+                return redirect( '/product_search')
         if product_description == '' and serial_number != '':
             ware_house_obj = ware_house_model.objects.filter(
                 serial_number=serial_number)
-            context = {'ware_house_obj': ware_house_obj}
-            return render(request, 'warehouse/customer.html', context)
+            if ware_house_obj.exists():
+                
+                context = {'ware_house_obj': ware_house_obj}
+                return render(request, 'warehouse/customer.html', context)
+            else:
+                messages.success(request, 'Your Entered Data not matched.')
+                return redirect( '/product_search')
 
     return render(request, 'warehouse/product_search.html')
 
@@ -90,7 +123,7 @@ def customer_view(request):
 def warehouse_view(request):
     return render(request, 'warehouse/warehouse_data.html')
 
-
+@login_required(login_url='login')
 def options_view(request):
     all_data = ware_house_model.objects.all()
     list_of_warehouses = []
