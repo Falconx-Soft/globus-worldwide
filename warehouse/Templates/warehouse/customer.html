@@ -52,6 +52,24 @@
                 <button class="btn btn-lg customer_btn btn-primary btn-block mb-2 mx-2" type="submit" style="">Export</button>
                 <input id="input_customer" type="text" value="" name="serial_numbers" hidden required>
             </form>
+            {% if file_path %}
+            <div class="container">
+                <h2>Click below link to download the file</h2>
+            <a href={{file_path}} style="font-size: large;" download> download csv file</a>
+
+            </div>
+            
+            <style>
+                .table{
+                    display: none;
+                    
+                }
+                .customer_btn{
+                    display: none;
+                }
+            </style>
+            {% endif %}
+
 
             <table class="table my-5 ms-1 me-1">
                 <thead>
@@ -98,6 +116,7 @@
                    
                 </tbody>
                 {% endfor %}
+                
             </table>
            
     
@@ -126,6 +145,7 @@
            console.log((' input value', $('#input_customer').val()))
            
         });
+       
 
     </script>
 </body>

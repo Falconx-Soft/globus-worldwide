@@ -39,18 +39,48 @@
         font-size: large;
 
     }
+    .select-all{
+        border: 2px solid;
+    margin-left: 113px;
+    width: 101px;
+    padding: 7px;
+    background: #1071bb;
+    }
 </style>
 
 {% endblock %}
 {% block body %}
 
 <body>
-    <h1 style="text-transform: capitalize; font-style: oblique; text-align: center;">{{warehouse_no}}</h1>
+    <h1 style="text-transform: capitalize; font-style: oblique; text-align: center; margin-top: 30px;">{{warehouse_no}}</h1>
     <form method="post" action="{% url 'export_details' %}">
         {% csrf_token %}
         <button class="btn btn-lg btn-primary btn-block mb-2 ms-2 ware_data" type="submit" style="">Export</button>
         <input id="input" type="text" value="" name="serial_numbers" hidden required>
     </form>
+    {% if file_path %}
+    <div class="container">
+        <h2>Click below link to download the file</h2>
+    <a href={{file_path}} style="font-size: large;" download> download csv file</a>
+
+    </div>
+    
+    <style>
+        .table{
+            display: none;
+            
+        }
+        .ware_data{
+            display: none;
+        }
+    </style>
+    {% endif %}
+    <div class="select-all">
+        <input type="checkbox" id="select-all">
+    <label for="" style="    font-size: small;font-weight: 600;" >Select All</label>
+
+    </div>
+    
     <table class="table my-5 ms-1 me-1">
         <thead>
             <tr>

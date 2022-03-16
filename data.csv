@@ -1,3 +1,0 @@
-customer_name,customer_id,serial_number,height,width,length,storage_space,weight,storage_name,locate,date,description,quantity,warehouse
-HPSA,C-002,75-0944,1.56,6.04,4.71,44.41,98,Warehouse 44,023-011-330,2022-03-08,BOX-00333,13,warehouse 1
-HPSA,C-002,75-0950,1.14,3.73,4.77,20.33,175,Warehouse 44,023-011-336,2022-03-08,BOX-00339,3,warehouse 1

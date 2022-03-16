@@ -120,11 +120,17 @@
       display: inline;
     }
     .base_button_block{
-      margin-left: 350px;
+      justify-content: center;
+    text-align: center;
+    padding-right: 28px;
+      
     }
     .home_buttons{
       
-      margin-left: 60px;
+      margin-left: 24px;
+    }
+    .btn-all-pages{
+      background: #1071bb;
     }
   </style>
   {% block css %}
@@ -153,13 +159,13 @@
    
     <div class=" d-flex  base_button_block">
       <div class="home_buttons ml-3">
-         <a href="{% url 'customer_search' %}"><button type="button" class="btn btn-primary my-2"><h3 class="search_buttons">Customer</h3></button></a> 
+         <a href="{% url 'customer_search' %}"><button type="button" class="btn btn-primary btn-all-pages my-2"><h3 class="search_buttons">Customer</h3></button></a> 
       </div>
       <div class="home_buttons">
-          <a href="{% url 'product_search' %}"><button type="button" class="btn btn-primary my-2"><h3 class="search_buttons"> Product</h3></button></a>
+          <a href="{% url 'product_search' %}"><button type="button" class="btn btn-primary btn-all-pages my-2"><h3 class="search_buttons"> Product</h3></button></a>
       </div>
       <div class="home_buttons">
-          <a href="{% url 'options' %}"><button type="button" class="btn btn-primary my-2"><h3 class="search_buttons">Warehouse</h3></button></a>
+          <a href="{% url 'options' %}"><button type="button" class="btn btn-primary btn-all-pages my-2"><h3 class="search_buttons">Warehouse</h3></button></a>
       </div>
   
 

@@ -120,6 +120,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 IMPORT_EXPORT_USE_TRANSACTIONS = True
+# STATIC_ROOT=os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 MEDIA_URL= '/images/'
 STATICFILES_DIRS= [

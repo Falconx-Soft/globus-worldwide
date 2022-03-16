@@ -9,6 +9,8 @@ from .models import*
 import csv
 import random
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse
+from django.conf import settings
 # Create your views here.
 
 
@@ -174,11 +176,13 @@ def export_warehouse_details(request):
         if list_of_data:
             keys = list_of_data[0].keys()
 
-            with open('warehouse'+str(n)+'.csv', 'w', newline='') as output_file:
+            with open('static/csvfiles/warehouse'+str(n)+'.csv', 'w', newline='') as output_file:
                 dict_writer = csv.DictWriter(output_file, keys)
                 dict_writer.writeheader()
                 dict_writer.writerows(list_of_data)
-
+            file_path=settings.STATIC_URL+"csvfiles/warehouse"+str(n)+".csv"
+            context= {'file_path' : file_path}
+            return render(request, 'warehouse/warehouse_data.html', context)
         print(len(serial_number))
         return redirect('/options')
     return render(request, 'warehouse/warehouse_options.html')
@@ -212,12 +216,19 @@ def export_customer(request):
         if list_of_data:
             keys = list_of_data[0].keys()
 
-            with open('customer'+str(n)+'.csv' , 'w', newline='') as output_file:
+            with open('static/csvfiles/customer'+str(n)+'.csv' , 'w', newline='') as output_file:
                 dict_writer = csv.DictWriter(output_file, keys)
                 dict_writer.writeheader()
                 dict_writer.writerows(list_of_data)
-
+            # with open(file_path, 'rb') as fh:    
+            #     response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")    
+            #     response['Content-Disposition'] = 'inline; filename=' + 'customer'+ n    
+            #     return response
+            file_path=settings.STATIC_URL+"csvfiles/customer"+str(n)+".csv"
+            context= {'file_path' : file_path}
+            return render(request, 'warehouse/customer.html', context)
         print(len(serial_number))
-        return redirect('/home')
+        
+        return HttpResponse(file_path)
     
     return render(request, 'warehouse/warehouse_options.html')
