@@ -20,39 +20,55 @@
         /* max-width: 102px; */
         background: #abaee2;
     }
-    .table{
+
+    .table {
         font-size: medium;
-    border: 2px solid;
+        border: 2px solid;
     }
-    th{
+
+    th {
         border: 1px solid;
     }
-    td{
+
+    td {
         border: 1px solid;
     }
-    tr{
+
+    tr {
         background: cadetblue;
     }
+
     .ware_data {
+        background: #1071bb;
         width: 70px;
         float: left;
         font-size: large;
 
     }
-    .select-all{
-        border: 2px solid;
-    margin-left: 113px;
-    width: 101px;
-    padding: 7px;
-    background: #1071bb;
+
+    .select-all {
+        border: 2px solid black;
+        margin-left: 113px;
+        width: 101px;
+        padding: 7px;
+        background: #1071bb;
+        border-radius: 6px;
+        font-size: larger;
+        height: 41px;
+        color: aliceblue;
     }
+
+    
+
+    
 </style>
 
 {% endblock %}
 {% block body %}
 
 <body>
-    <h1 style="text-transform: capitalize; font-style: oblique; text-align: center; margin-top: 30px;">{{warehouse_no}}</h1>
+    <h1 style="text-transform: capitalize; font-style: oblique; text-align: center; margin-top: 30px;">{{warehouse_no}}
+    </h1>
     <form method="post" action="{% url 'export_details' %}">
         {% csrf_token %}
         <button class="btn btn-lg btn-primary btn-block mb-2 ms-2 ware_data" type="submit" style="">Export</button>
@@ -61,34 +77,40 @@
     {% if file_path %}
     <div class="container">
         <h2>Click below link to download the file</h2>
-    <a href={{file_path}} style="font-size: large;" download> download csv file</a>
+        <a href={{file_path}} style="font-size: large;" download> download csv file</a>
 
     </div>
-    
     <style>
-        .table{
-            display: none;
-            
-        }
-        .ware_data{
-            display: none;
-        }
+        .table {
+        display: none;
+
+    }
+
+    .ware_data {
+        background: #1071bb;
+        display: none;
+    }
+    .select-all{
+        display: none;
+
+    }
     </style>
+
     {% endif %}
     <div class="select-all">
         <input type="checkbox" id="select-all">
-    <label for="" style="    font-size: small;font-weight: 600;" >Select All</label>
+        <label for="" style="    font-size: small;font-weight: 600;">Select All</label>
 
     </div>
-    
+
     <table class="table my-5 ms-1 me-1">
         <thead>
             <tr>
                 <th>Select rows</th>
                 <th>Customer Name</th>
-                <th>customer_id</th>
-                <th>serial_number</th>
-                <th>height</th>
+                <th>Customer id</th>
+                <th>Serial number</th>
+                <th>Height</th>
                 <th>Width</th>
                 <th>Length</th>
                 <th>Storage Space</th>
@@ -99,61 +121,86 @@
                 <th>Description</th>
                 <th>Quantity</th>
                 <th>Warehouse</th>
-                
+
             </tr>
         </thead>
-       
+
         {% for warehouse in all_warehouse_data %}
         <tbody>
             <tr>
                 <td><input type="checkbox" class="form-check-input-warehouse" id="check_button" name="is_client"
-                    value="{{warehouse.serial_number}}"></td>
+                        value="{{warehouse.serial_number}}"></td>
                 <td>{{warehouse.customer_name}}</td>
-                <td>{{warehouse.customer_id}}  </td>
-                <td>{{warehouse.serial_number}}</td>
-                <td>{{warehouse.height}}       </td>
-                <td>{{warehouse.width}}        </td>
-                <td>{{warehouse.length}}       </td>
+                <td>{{warehouse.customer_id}} </td>
+                <td id="serial-no">{{warehouse.serial_number}}</td>
+                <td>{{warehouse.height}} </td>
+                <td>{{warehouse.width}} </td>
+                <td>{{warehouse.length}} </td>
                 <td>{{warehouse.storage_space}}</td>
-                <td>{{warehouse.weight}}       </td>
+                <td>{{warehouse.weight}} </td>
                 <td>{{warehouse.storage_name}} </td>
-                <td>{{warehouse.locate}}       </td>
-                <td>{{warehouse.date}}         </td>
-                <td>{{warehouse.description}}  </td>
-                <td>{{warehouse.quantity}}     </td>
-                <td>{{warehouse.warehouse}}     </td>
+                <td>{{warehouse.locate}} </td>
+                <td>{{warehouse.date}} </td>
+                <td>{{warehouse.description}} </td>
+                <td>{{warehouse.quantity}} </td>
+                <td>{{warehouse.warehouse}} </td>
 
             </tr>
-           
+
         </tbody>
         {% endfor %}
     </table>
-    
+
     <script>
-        var input_value=$('#input').val()
-        var str =""
+        var input_value = $('#input').val()
+        var str = ""
         $(".form-check-input-warehouse").click(function () {
-           var id= $(this).val();
-           console.log(id)
-           if ($('#input').val().includes(id)){
-            console.log('in if statement')
-            str= str.replace(id+',', '')
+            var id = $(this).val();
+            console.log(id)
+            if ($('#input').val().includes(id)) {
+                console.log('in if statement')
+                str = str.replace(id + ',', '')
+                $('#input').val(str)
+            }
+
+            else {
+                str = str + id + ','
+                console.log('string value', str)
+
+                $('#input').val(str)
+
+            }
+
+
+
+            console.log(' input value', $('#input').val())
+
+        });
+        var str_all= ""
+        $("#select-all").on("click", function (e){
+        $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+        $( "tr" ).each(function( index ) {
+            serial_number= $( this ).children("#serial-no").text()
+            serial_number_string= String(serial_number)
+            console.log('typeof serial',typeof(serial_number) )
+            if ($('#input').val().includes(serial_number_string)){
+            
+            str= str.replace(serial_number_string+',' , '')
+            str= str.replace(serial_number_string , '')
+            console.log("serial_number_string", serial_number_string)
             $('#input').val(str)
            }
-                     
            else{
-            str = str  + id+ ','
-           console.log('string value', str)
-           
-           $('#input').val(str)
-
+            str = str + serial_number_string + ','
+            $('#input').val(str)
+            // console.log("else", str_all)
+// 
            }
-          
-           
+            
+  console.log('in serial number:',$('#input').val());
+});
 
-           console.log((' input value', $('#input').val()))
-           
-        });
+});
 
     </script>
 </body>

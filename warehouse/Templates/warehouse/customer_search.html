@@ -26,6 +26,7 @@
 {% block body %}
 <body>
 <div class="container">
+    
     <div class="customer_search">
         <h2>Search by Customer Name or Customer ID</h2>
         <form method="post" action="{% url 'customer_search' %}">
@@ -33,7 +34,7 @@
             {% if messages %}
             <ul class="messages" style=" color: brown; font-weight: 600; padding: 2px; font-size: larger;">
                 {% for message in messages %}
-                <li{% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
                     {% endfor %}
             </ul>
         {% endif %}

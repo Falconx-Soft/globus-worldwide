@@ -39,6 +39,17 @@
         font-size: large;
 
     }
+    .select-all {
+        border: 2px solid black;
+        margin-left: 113px;
+        width: 101px;
+        padding: 7px;
+        background: #1071bb;
+        border-radius: 6px;
+        font-size: larger;
+        height: 41px;
+        color: aliceblue;
+    }
 </style>
 
 {% endblock %}
@@ -67,8 +78,16 @@
                 .customer_btn{
                     display: none;
                 }
+                .select-all{
+                    display: none;
+                }
             </style>
             {% endif %}
+            <div class="select-all">
+                <input type="checkbox" id="select-all">
+                <label for="" style="    font-size: small;font-weight: 600;">Select All</label>
+        
+            </div>
 
 
             <table class="table my-5 ms-1 me-1">
@@ -95,11 +114,11 @@
                 {% for customer in ware_house_obj %}
                 <tbody>
                     <tr>
-                        <td><input type="checkbox" class="form-check-input" id="check_button" name="is_client"
-                            value="{{customer.serial_number}}"></td>
+                        <td><input type="checkbox" class="form-check-input checkboxAll" id="check_button" name="is_client"
+                            value="{{customer.serial_number}}" ></td>
                         <td>{{customer.customer_name}}</td>
                         <td>{{customer.customer_id}}  </td>
-                        <td>{{customer.serial_number}}</td>
+                        <td id="serial-no">{{customer.serial_number}}</td>
                         <td>{{customer.height}}       </td>
                         <td>{{customer.width}}        </td>
                         <td>{{customer.length}}       </td>
@@ -125,27 +144,62 @@
     
     
     <script>
-         var str =""
-        $(".form-check-input").click(function () {
+         var str_cust =""
+        $(".form-check-input").on("click", function (e){
            var id= $(this).val();
+           console.log("id", typeof(id))
            if ($('#input_customer').val().includes(id)){
-            console.log('in if statement')
-            str= str.replace(id+',', '')
-            $('#input_customer').val(str)
+            console.log('in if statement', id)
+            str_cust= "str_cust.replace(id+',', '')"
+            $('#input_customer').val(str_cust)
            }
                      
            else{
-            str = str  + id+ ','
-           console.log('string value', str)
+            str_cust = str_cust  + id+ ','
+           console.log('string value', str_cust)
            
-           $('#input_customer').val(str)
+           $('#input_customer').val(str_cust)
 
            }
 
-           console.log((' input value', $('#input_customer').val()))
+           console.log(' input value one:', $('#input_customer').val())
            
         });
-       
+    //     $("#select-all").click(function(){
+    //     if(this.checked){
+    //         $('.checkboxAll').each(function(){
+    //             $(".checkboxAll").prop('checked', true);
+    //         })
+    //     }else{
+    //         $('.checkboxAll').each(function(){
+    //             $(".checkboxAll").prop('checked', false);
+    //         })
+    //     }
+    // });
+
+    var str_all= ""
+        $("#select-all").on("click", function (e){
+        $("input[type=checkbox]").prop('checked', $(this).prop('checked'));
+        $( "tr" ).each(function( index ) {
+            serial_number_cust= $( this ).children("#serial-no").text()
+            serial_number_cust_string= String(serial_number_cust)
+            console.log('typeof serial',typeof(serial_number_cust) )
+            if ($('#input_customer').val().includes(serial_number_cust_string)){
+            
+            str_cust= str_cust.replace(serial_number_cust_string+',' , '')
+            str_cust= str_cust.replace(serial_number_cust_string , '')
+            console.log("serial_number_string", serial_number_cust_string)
+            $('#input_customer').val(str_cust)
+           }
+           else{
+            str_cust = str_cust + serial_number_cust_string + ','
+            $('#input_customer').val(str_cust)
+           }
+            
+  console.log('in serial number:',$('#input_customer').val());
+});
+
+});
 
     </script>
 </body>

@@ -142,8 +142,7 @@ def options_view(request):
     if request.method == 'POST':
         warehouse_no = request.POST.get('storage_name')
         print('storage name:', warehouse_no)
-        all_warehouse_data = ware_house_model.objects.filter(
-            warehouse=warehouse_no)
+        all_warehouse_data = ware_house_model.objects.filter(warehouse=warehouse_no)
         context = {'all_warehouse_data': all_warehouse_data,
                    'warehouse_no': warehouse_no}
         return render(request, 'warehouse/warehouse_data.html', context)
@@ -156,79 +155,86 @@ def export_warehouse_details(request):
     print('export view')
     list_of_data = []
     if request.method == 'POST':
-        input_serials = request.POST.get('serial_numbers')
-        print(' input serials:', input_serials)
-        serial_number = input_serials.split(",")
-        length = len(serial_number)
-        list_of_data = []
-        print('serials', serial_number[0])
-        for i in range(length):
-            if serial_number[i] != "":
-                print(serial_number[i])
-                data = ware_house_model.objects.get(serial_number=serial_number[i])
+        try:
+            input_serials = request.POST.get('serial_numbers')
+            print(' input serials:', input_serials)
+            serial_number = input_serials.split(",")
+            length = len(serial_number)
+            list_of_data = []
+            print('serials', serial_number[0])
+            for i in range(length):
+                if serial_number[i] != "":
+                    print(serial_number[i])
+                    data = ware_house_model.objects.get(serial_number=serial_number[i])
 
-                list_of_data.append({"customer_name": data.customer_name, 'customer_id': data.customer_id, 'serial_number': data.serial_number, 'height': data.height, 'width': data.width,
-                                     'length': data.length, 'storage_space': data.storage_space, 'weight': data.weight, 'storage_name': data.storage_name, 'locate': data.locate, 'date': data.date, 'description': data.description, 'quantity': data.quantity, 'warehouse': data.warehouse})
-                print('********************')
-                print('list:', list_of_data)
-                print('data:')
-        n = random.randint(0,10000)
-        if list_of_data:
-            keys = list_of_data[0].keys()
+                    list_of_data.append({"customer_name": data.customer_name, 'customer_id': data.customer_id, 'serial_number': data.serial_number, 'height': data.height, 'width': data.width,
+                                        'length': data.length, 'storage_space': data.storage_space, 'weight': data.weight, 'storage_name': data.storage_name, 'locate': data.locate, 'date': data.date, 'description': data.description, 'quantity': data.quantity, 'warehouse': data.warehouse})
+                    print('********************')
+                    # print('list:', list_of_data)
+                    # print('data:')
+            n = random.randint(0,10000)
+            if list_of_data:
+                keys = list_of_data[0].keys()
 
-            with open('static/csvfiles/warehouse'+str(n)+'.csv', 'w', newline='') as output_file:
-                dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(list_of_data)
-            file_path=settings.STATIC_URL+"csvfiles/warehouse"+str(n)+".csv"
-            context= {'file_path' : file_path}
-            return render(request, 'warehouse/warehouse_data.html', context)
-        print(len(serial_number))
-        return redirect('/options')
-    return render(request, 'warehouse/warehouse_options.html')
+                with open('static/csvfiles/warehouse'+str(n)+'.csv', 'w', newline='') as output_file:
+                    dict_writer = csv.DictWriter(output_file, keys)
+                    dict_writer.writeheader()
+                    dict_writer.writerows(list_of_data)
+                file_path=settings.STATIC_URL+"csvfiles/warehouse"+str(n)+".csv"
+                context= {'file_path' : file_path}
+                return render(request, 'warehouse/warehouse_data.html', context)
+            print(len(serial_number))
+            return redirect('/options')
+        except: 
+            return render(request, 'warehouse/home.html')
 
 
 def export_customer(request):
     print('export view')
     list_of_data = []
     n = 0
+    context={}
     if request.method == 'POST':
-        input_serials = request.POST.get('serial_numbers')
-        print(' input serials:', input_serials)
-        serial_number = input_serials.split(",")
-        length = len(serial_number)
-        list_of_data = []
-        print('serials', serial_number[0])
-        for i in range(length):
-            if serial_number[i] != "":
-                print(serial_number[i])
-                data = ware_house_model.objects.get(serial_number=serial_number[i])
+        try:
+            input_serials = request.POST.get('serial_numbers')
+            print(' input serials:', input_serials)
+            serial_number = input_serials.split(",")
+            length = len(serial_number)
+            list_of_data = []
+            print('serials', serial_number[0])
+            for i in range(length):
+                if serial_number[i] != "":
+                    print(serial_number[i])
+                    data = ware_house_model.objects.get(serial_number=serial_number[i])
 
-                list_of_data.append({"customer_name": data.customer_name, 'customer_id': data.customer_id, 'serial_number': data.serial_number, 'height': data.height, 'width': data.width,
-                                     'length': data.length, 'storage_space': data.storage_space, 'weight': data.weight, 'storage_name': data.storage_name, 'locate': data.locate, 'date': data.date, 'description': data.description, 'quantity': data.quantity, 'warehouse': data.warehouse})
-                print('********************')
-                print('list:', list_of_data)
-                print('data:')
-        n = random.randint(0,10000)
-        print('************************')
-        print('random', n)
-        
-        if list_of_data:
-            keys = list_of_data[0].keys()
+                    list_of_data.append({"customer_name": data.customer_name, 'customer_id': data.customer_id, 'serial_number': data.serial_number, 'height': data.height, 'width': data.width,
+                                        'length': data.length, 'storage_space': data.storage_space, 'weight': data.weight, 'storage_name': data.storage_name, 'locate': data.locate, 'date': data.date, 'description': data.description, 'quantity': data.quantity, 'warehouse': data.warehouse})
+                    print('********************')
+                    print('list:', list_of_data)
+                    print('data:')
+            n = random.randint(0,10000)
+            print('************************')
+            print('random', n)
+            
+            if list_of_data:
+               
+                keys = list_of_data[0].keys()
 
-            with open('static/csvfiles/customer'+str(n)+'.csv' , 'w', newline='') as output_file:
-                dict_writer = csv.DictWriter(output_file, keys)
-                dict_writer.writeheader()
-                dict_writer.writerows(list_of_data)
-            # with open(file_path, 'rb') as fh:    
-            #     response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")    
-            #     response['Content-Disposition'] = 'inline; filename=' + 'customer'+ n    
-            #     return response
-            file_path=settings.STATIC_URL+"csvfiles/customer"+str(n)+".csv"
-            context= {'file_path' : file_path}
-            return render(request, 'warehouse/customer.html', context)
-        print(len(serial_number))
-        
-        return HttpResponse(file_path)
-    
-    return render(request, 'warehouse/warehouse_options.html')
+                with open('static/csvfiles/customer'+str(n)+'.csv' , 'w', newline='') as output_file:
+                    dict_writer = csv.DictWriter(output_file, keys)
+                    dict_writer.writeheader()
+                    dict_writer.writerows(list_of_data)
+                # with open(file_path, 'rb') as fh:    
+                #     response = HttpResponse(fh.read(), content_type="application/vnd.ms-excel")    
+                #     response['Content-Disposition'] = 'inline; filename=' + 'customer'+ n    
+                #     return response
+                file_path=settings.STATIC_URL+"csvfiles/customer"+str(n)+".csv"
+                context= {'file_path' : file_path}
+                return render(request, 'warehouse/customer.html', context)
+            
+                print(len(serial_number))
+            
+            # return HttpResponse(file_path)
+        except:
+            messages.success(request, 'Nothing To export')
+            return redirect('/customer_search')
