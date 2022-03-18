@@ -150,7 +150,7 @@
            console.log("id", typeof(id))
            if ($('#input_customer').val().includes(id)){
             console.log('in if statement', id)
-            str_cust= "str_cust.replace(id+',', '')"
+            str_cust= str_cust.replace(id+',', '')
             $('#input_customer').val(str_cust)
            }
                      
@@ -184,6 +184,7 @@
             serial_number_cust= $( this ).children("#serial-no").text()
             serial_number_cust_string= String(serial_number_cust)
             console.log('typeof serial',typeof(serial_number_cust) )
+            console.log('serial number cust string::::',serial_number_cust_string )
             if ($('#input_customer').val().includes(serial_number_cust_string)){
             
             str_cust= str_cust.replace(serial_number_cust_string+',' , '')
@@ -196,7 +197,7 @@
             $('#input_customer').val(str_cust)
            }
             
-  console.log('in serial number:',$('#input_customer').val());
+//   console.log('in serial number:',$('#input_customer').val());
 });
 
 });
