@@ -147,7 +147,7 @@
          var str_cust =""
         $(".form-check-input").on("click", function (e){
            var id= $(this).val();
-           console.log("id", typeof(id))
+           console.log("id", id)
            if ($('#input_customer').val().includes(id)){
             console.log('in if statement', id)
             str_cust= str_cust.replace(id+',', '')
@@ -187,8 +187,9 @@
             console.log('serial number cust string::::',serial_number_cust_string )
             if ($('#input_customer').val().includes(serial_number_cust_string)){
             
-            str_cust= str_cust.replace(serial_number_cust_string+',' , '')
+            // str_cust= str_cust.replace(serial_number_cust_string+',' , '')
             str_cust= str_cust.replace(serial_number_cust_string , '')
+            str_cust= str_cust.replace(',', '')
             console.log("serial_number_string", serial_number_cust_string)
             $('#input_customer').val(str_cust)
            }
@@ -197,9 +198,9 @@
             $('#input_customer').val(str_cust)
            }
             
-//   console.log('in serial number:',$('#input_customer').val());
+ 
 });
-
+console.log('in serial number:',$('#input_customer').val());
 });
 
     </script>
