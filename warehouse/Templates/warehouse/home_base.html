@@ -92,7 +92,7 @@
 
         .logo {
             margin-top: 46px;
-            justify-content: center;
+           
             margin-left: auto;
             height: auto;
             width: auto;
@@ -108,6 +108,39 @@
             position: relative;
     left: -900px;
         }
+        @media only screen and (max-width:700px) {
+
+.logo{
+    width: 240px;
+}
+
+}
+@media only screen and (max-width:490px) {
+
+.logo{
+    
+    width: 133px;
+}
+
+}
+@media only screen and (max-width:400px) {
+
+.logo{
+    margin-left: 70px;
+    
+    width: 133px;
+}
+
+}
+@media only screen and (max-width:320px) {
+
+.logo{
+    margin-left: 140px;
+    
+    width: 133px;
+}
+
+}
     
     </style>
     {% block css %}
@@ -117,9 +150,11 @@
 
 <body style="text-align: center;">
     
-    
+    <div>
         
-    <div class="w3-sidebar  w3-bar-block" style="width:15%; border-right:2px solid white;">
+    </div>
+        
+    <div class="w3-sidebar  w3-bar-block" style="width:auto; border-right:2px solid white;">
         <div >
             <h2 class="w3-bar-item" style="font-style: oblique; text-transform: capitalize; font-weight: 700;">{{request.user.username}}</h2>
             <a href="{% url 'login' %}" class="w3-bar-item w3-button">Log out</a>
@@ -128,8 +163,11 @@
 
         
     </div>
-    <a href="{% url 'home' %}"><img class="logo" src="{% static 'images/globus-icon.jfif' %}" width="100px"
+    <div style="display: flex; flex-direction: column;">
+        <a href="{% url 'home' %}"><img class="logo" src="{% static 'images/globus-icon.jfif' %}" width="100px"
             height="50px"></a>
+    </div>
+   
     {% block body %}{% endblock %}
 
 

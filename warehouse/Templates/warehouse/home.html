@@ -17,6 +17,7 @@
 
 }
 .home_button_block{
+    display: flex;
     margin-top: 20px;
     margin-left: 400PX;
     position: relative;
@@ -37,7 +38,66 @@
     padding: 0px;
 
 }
+.search-by-title{
+    float: left; margin-top: -80px; margin-left: auto;
 
+}
+@media only screen and (max-width:900px) {
+  .home_button_block{
+      display: block;
+  }
+  .home_buttons{
+      margin-top: 20px;
+  }
+  .search-by-title{
+      float: none;
+      margin-left: auto;
+  }
+  
+}
+@media only screen and (max-width:700px) {
+
+.search-by-title{
+    font-size: large;
+    font-weight: 500;
+}
+.search_buttons{
+    font-size: large;
+    width: 135px;
+}
+
+}
+@media only screen and (max-width:490px) {
+
+.search-by-title{
+    
+    font-size: large;
+    font-weight: 500;
+}
+.search_buttons{
+    
+    font-size: large;
+    width: 135px;
+}
+.home_search_button{
+    height: 34px;
+}
+
+}
+@media only screen and (max-width:340px) {
+    .search-by-title{
+        margin-left: 30px;
+    }
+}
+@media only screen and (max-width:350px) {
+    .home_buttons{
+        margin-left: -52px;
+    }
+    .search_buttons{
+        font-size: initial;
+    width: 100px;
+    }
+}
 </style>
 {% endblock %}
 {% block body %}
@@ -47,17 +107,17 @@
     
 
     <div class="container" style="text-align: center;">
-        <h2 style="float: left; margin-top: -80px; margin-left: 101px;">Search By:</h2>
+        <h2 class="search-by-title" style="">Search By:</h2>
         
-        <div class=" d-flex ms-1 home_button_block">
+        <div class="  ms-1 home_button_block">
             <div class="home_buttons ml-3">
-               <a href="{% url 'customer_search' %}"><button type="button" class="btn btn-primary my-2"><h3 class="search_buttons">Customer</h3></button></a> 
+               <a href="{% url 'customer_search' %}"><button type="button" class="btn btn-primary my-2 home_search_button"><h3 class="search_buttons">Customer</h3></button></a> 
             </div>
             <div class="home_buttons">
-                <a href="{% url 'product_search' %}"><button type="button" class="btn btn-primary my-2"><h3 class="search_buttons"> Product</h3></button></a>
+                <a href="{% url 'product_search' %}"><button type="button" class="btn btn-primary my-2 home_search_button"><h3 class="search_buttons"> Product</h3></button></a>
             </div>
             <div class="home_buttons">
-                <a href="{% url 'options' %}"><button type="button" class="btn btn-primary my-2"><h3 class="search_buttons">Warehouse</h3></button></a>
+                <a href="{% url 'options' %}"><button type="button" class="btn btn-primary my-2 home_search_button"><h3 class="search_buttons">Warehouse</h3></button></a>
             </div>
         </div>
     </div>

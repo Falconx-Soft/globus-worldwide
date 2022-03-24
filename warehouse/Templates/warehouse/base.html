@@ -99,81 +99,118 @@
 
 
     }
-    .home_btn{
+
+    .home_btn {
       font-size: large;
-    color: beige;
-    text-decoration: auto;
-    position: relative;
-    left: -1000px;
+      color: beige;
+      text-decoration: auto;
+      position: relative;
+
     }
-    a{
+
+    a {
       color: #eee;
       text-decoration: none;
-      
+
     }
-    .logo-nav{
+
+    .logo-nav {
       font-size: x-large;
       font-style: italic;
     }
-    .nav{
+
+    .nav {
+      
       display: flex;
       display: inline;
     }
-    .base_button_block{
-      justify-content: center;
-    text-align: center;
-    padding-right: 28px;
-      
+    .navbar{
+      background: #1371ba; padding: 10px; border-bottom:1px solid white ;
     }
-    .home_buttons{
-      
+
+    .base_button_block {
+      display: flex;
+      justify-content: center;
+      text-align: center;
+      padding-right: 28px;
+
+    }
+
+    .home_buttons {
+
       margin-left: 24px;
     }
-    .btn-all-pages{
+
+    .btn-all-pages {
       background: #1071bb;
     }
+    @media only screen and (max-width:600px) {
+          .logo{
+            width: 200px;
+          }
+          .base_button_block{
+            display: block;
+          }
+          .btn{
+            min-width: 108px;
+          }
+          
+
+}
   </style>
   {% block css %}
   {% endblock %}
   <title>Globus WorldWide</title>
 </head>
 
-<body >
-  <nav class="navbar navbar-default" style="background: #1371ba; padding: 10px; border-bottom:1px solid white ;">
-    <div class="container-fluid" >
+<body>
+  <nav class="navbar " style="">
+    <div class="container-fluid d-flex">
       <div class="navbar-header">
         <a class="navbar-brand logo-nav" href="{% url 'home' %}">Globus</a>
       </div>
-      <ul class="nav navbar-nav d-flex">
-        <div class="active home_btn" style="float: left; color: #fff;"><a href="{% url 'home' %}">Home</a></div>
-       
-       
-      </ul>
+      <div style="width: 80%;">
+        <ul class="nav navbar-nav d-flex">
+          <div class="active home_btn" style="float: left; color: #fff;"><a href="{% url 'home' %}">Home</a></div>
+
+
+        </ul>
+
+      </div>
+
     </div>
   </nav>
 
-  
-<div style="text-align: center;">
-  <a href="{% url 'home' %}"><img class="logo" src="{% static 'images/globus-icon.jfif' %}" width="100px"
-    height="50px"></a>
-   
-    <div class=" d-flex  base_button_block">
-      <div class="home_buttons ml-3">
-         <a href="{% url 'customer_search' %}"><button type="button" class="btn btn-primary btn-all-pages my-2"><h3 class="search_buttons">Customer</h3></button></a> 
-      </div>
-      <div class="home_buttons">
-          <a href="{% url 'product_search' %}"><button type="button" class="btn btn-primary btn-all-pages my-2"><h3 class="search_buttons"> Product</h3></button></a>
-      </div>
-      <div class="home_buttons">
-          <a href="{% url 'options' %}"><button type="button" class="btn btn-primary btn-all-pages my-2"><h3 class="search_buttons">Warehouse</h3></button></a>
-      </div>
-  
+  <div>
+    <div style="text-align: center; margin-left: auto;">
+      <a href="{% url 'home' %}"><img class="logo" src="{% static 'images/globus-icon.jfif' %}" width="100px"
+          height="50px"></a>
 
-   </div>
-    
-</div>
+      <div class="   base_button_block">
+        <div class="home_buttons ml-3">
+          <a href="{% url 'customer_search' %}"><button type="button" class="btn btn-primary btn-all-pages my-2">
+              <h3 class="search_buttons">Customer</h3>
+            </button></a>
+        </div>
+        <div class="home_buttons">
+          <a href="{% url 'product_search' %}"><button type="button" class="btn btn-primary btn-all-pages my-2">
+              <h3 class="search_buttons"> Product</h3>
+            </button></a>
+        </div>
+        <div class="home_buttons">
+          <a href="{% url 'options' %}"><button type="button" class="btn btn-primary btn-all-pages my-2">
+              <h3 class="search_buttons">Warehouse</h3>
+            </button></a>
+        </div>
 
- 
+
+      </div>
+
+    </div>
+  </div>
+
+
+
   {% block body %}{% endblock %}
 
 

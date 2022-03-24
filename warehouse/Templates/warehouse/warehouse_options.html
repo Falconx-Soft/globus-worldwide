@@ -6,31 +6,25 @@
     align-items: center;
     padding: 100px;
 }
-.warehouse_buttons{
-    margin-right: -20px ;
-    margin: revert;
-
-    width: 300px;
-
+.form_ware_opts{
+    display: flex;
 }
-/* .home_button_block{
-    margin-top: 20px;
-    margin-left: auto;
-    position: relative;
-    justify-content: center;
-
-    align-items: center;
-}
-.search_buttons{
-    width: 100px;
-} */
 .ware_opts{
     text-transform: capitalize;
     background: #1371ba;
     height: 50px;
-    font-size: large;
+    font-size: initial;
 }
+@media only screen and (max-width:600px) {
 
+
+    .form_ware_opts{
+    display: block;
+}
+.warehouse_buttons{
+    justify-content: center;
+}
+}
 </style>
 {% endblock %}
 {% block body %}
@@ -38,15 +32,21 @@
 <body>
     <div class="container">
         <h1 style="float: left; margin-top: -70px;">Warehouse Options:</h1>
-        <form method="post" action="{% url 'options' %}" class="d-flex">
-            {% csrf_token %}
-            {% for storage in list_of_warehouses %}
-            <div class=" d-block home_button_block">
-                <div class="warehouse_buttons d-flex">
-                   <input name="storage_name" type="submit" value="{{storage}}" class="btn btn-primary my-2 ware_opts"> 
-                </div>
-            </div>
-            {% endfor %}
+        <form method="post" action="{% url 'options' %}" class=" justify-content-around form_ware_opts">
+                {% csrf_token %}
+                {% for storage in list_of_warehouses %}
+                
+                    <div class=" d-block home_button_block">
+                        <div class="warehouse_buttons d-flex">
+                           <input name="storage_name" type="submit" value="{{storage}}" class="btn btn-primary my-2 ware_opts"> 
+                        </div>
+                    </div>
+    
+                
+               
+                {% endfor %}
+
+            
         </form>
         
         
